@@ -1,6 +1,17 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Clock, ExternalLink, Shield, Users, Building } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ExternalLink, Shield, Users, Building, User, Github } from 'lucide-react';
 import Logo from './Logo';
+
+// Contact details shown in the "Get In Touch" section.
+// Leave a field empty ('' or []) to hide it.
+const contactDetails = {
+  name: 'Gajendra Singh',
+  email: 'gs0414536@gmail.com',
+  phones: ['+91 9588868607'],
+  github: 'https://github.com/gajendra57',
+  linkedin: '',
+  location: [] as string[],
+};
 
 const ContactSection: React.FC = () => {
   return (
@@ -27,53 +38,95 @@ const ContactSection: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
                   <div className="bg-emerald-600 p-3 rounded-full">
-                    <Mail className="w-5 h-5 text-white" />
+                    <User className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-gray-300 text-sm">Email Support</p>
-                    <p className="text-white font-semibold">22harshitakumari@gmail.com</p>
+                    <p className="text-gray-300 text-sm">Contact Person</p>
+                    <p className="text-white font-semibold">{contactDetails.name}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
-                  <div className="bg-blue-600 p-3 rounded-full">
-                    <Phone className="w-5 h-5 text-white" />
+                {contactDetails.email && (
+                  <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                    <div className="bg-emerald-600 p-3 rounded-full">
+                      <Mail className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 text-sm">Email</p>
+                      <a href={`mailto:${contactDetails.email}`} className="text-white font-semibold hover:text-emerald-300 transition-colors">
+                        {contactDetails.email}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-300 text-sm">Emergency Hotline</p>
-                    <p className="text-white font-semibold">+91 8409794119</p>
-                    <p className="text-white font-semibold">+91 8757119995</p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
-                  <div className="bg-purple-600 p-3 rounded-full">
-                    <ExternalLink className="w-5 h-5 text-white" />
+                {contactDetails.phones.length > 0 && (
+                  <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                    <div className="bg-blue-600 p-3 rounded-full">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 text-sm">Phone</p>
+                      {contactDetails.phones.map((phone) => (
+                        <a key={phone} href={`tel:${phone.replace(/\s/g, '')}`} className="block text-white font-semibold hover:text-emerald-300 transition-colors">
+                          {phone}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-300 text-sm">LinkedIn</p>
-                    <a 
-                      href="https://www.linkedin.com/in/harshita-kumari-37370a28a" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
-                    >
-                      Connect with us →
-                    </a>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
-                  <div className="bg-orange-600 p-3 rounded-full">
-                    <MapPin className="w-5 h-5 text-white" />
+                {contactDetails.github && (
+                  <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                    <div className="bg-gray-600 p-3 rounded-full">
+                      <Github className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 text-sm">GitHub</p>
+                      <a
+                        href={contactDetails.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+                      >
+                        {contactDetails.github.replace('https://', '')} →
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-300 text-sm">Headquarters</p>
-                    <p className="text-white font-semibold">123, Tech Hub</p>
-                    <p className="text-white">Jaipur, Rajasthan</p>
-                    <p className="text-white">India - 560001</p>
+                )}
+
+                {contactDetails.linkedin && (
+                  <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                    <div className="bg-purple-600 p-3 rounded-full">
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 text-sm">LinkedIn</p>
+                      <a
+                        href={contactDetails.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+                      >
+                        Connect with me →
+                      </a>
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {contactDetails.location.length > 0 && (
+                  <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                    <div className="bg-orange-600 p-3 rounded-full">
+                      <MapPin className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 text-sm">Location</p>
+                      {contactDetails.location.map((line) => (
+                        <p key={line} className="text-white">{line}</p>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
